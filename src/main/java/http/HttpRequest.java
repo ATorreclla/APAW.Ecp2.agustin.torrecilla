@@ -21,6 +21,10 @@ public class HttpRequest extends HttpBase {
         this("", HttpMethod.GET);
     }
 
+    public static Builder builder(String path) {
+        return new Builder(path);
+    }
+
     public String getPath(int order) {
         return this.path.split("/")[order + 1];
     }
@@ -86,15 +90,12 @@ public class HttpRequest extends HttpBase {
         return this.method.toString() + ' ' + this.path + this.queryParams() + "   " + super.toString();
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
     public static class Builder {
         private HttpRequest httpRequest;
 
-        private Builder() {
+        private Builder(String path) {
             this.httpRequest = new HttpRequest();
+            this.httpRequest.path = path;
         }
 
         public Builder path(String path) {
@@ -148,7 +149,5 @@ public class HttpRequest extends HttpBase {
             httpRequest.method = HttpMethod.DELETE;
             return httpRequest;
         }
-
     }
-
 }

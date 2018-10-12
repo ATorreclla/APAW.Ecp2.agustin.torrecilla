@@ -4,9 +4,13 @@ import api.daos.DaoFactory;
 
 import api.daos.ConductorDao;
 
+import api.daos.ControlCalidadDao;
+
 public class DaoMemoryFactory extends DaoFactory {
 
     private ConductorDao conductorDao;
+
+    private ControlCalidadDao controlCalidadDao;
 
     @Override
     public ConductorDao getConductorDao() {
@@ -15,4 +19,13 @@ public class DaoMemoryFactory extends DaoFactory {
         }
         return conductorDao;
     }
+
+    @Override
+    public ControlCalidadDao getControlCalidadDao() {
+        if (controlCalidadDao == null) {
+            controlCalidadDao = new ControlCalidadDaoMemory();
+        }
+        return controlCalidadDao;
+    }
+
 }

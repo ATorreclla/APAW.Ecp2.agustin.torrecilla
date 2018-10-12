@@ -2,6 +2,9 @@ package api;
 
 import api.apiControllers.ConductorApiController;
 import api.dtos.ConductorDto;
+import api.apiControllers.ControlCalidadApiController;
+import api.dtos.ControlCalidadDto;
+import api.entities.ControlCalidad;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.RequestInvalidException;
 import http.HttpRequest;
@@ -10,7 +13,9 @@ import http.HttpStatus;
 
 public class Dispatcher {
 
-    private ConductorApiController userApiController = new ConductorApiController();
+    private ConductorApiController conductorApiController = new ConductorApiController();
+
+    private ControlCalidadApiController controlCalidadApiController = new ControlCalidadApiController();
 
     public void submit(HttpRequest request, HttpResponse response) {
         String ERROR_MESSAGE = "{'error':'%S'}";
@@ -42,7 +47,9 @@ public class Dispatcher {
 
     private void doPost(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(ConductorApiController.CONDUCTORES)) {
-            response.setBody(this.userApiController.create((ConductorDto) request.getBody()));
+            response.setBody(this.conductorApiController.create((ConductorDto) request.getBody()));
+        } else if(request.isEqualsPath(ControlCalidadApiController.CONTROLCALIDADES)) {
+            response.setBody(this.controlCalidadApiController.create((ControlCalidadDto) request.getBody()));
         } else {
             throw new RequestInvalidException("method error: " + request.getMethod());
         }

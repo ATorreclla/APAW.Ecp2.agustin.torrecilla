@@ -14,4 +14,6 @@ public abstract class DaoFactory {
     }
 
     public abstract ConductorDao getConductorDao();
+
+    public abstract ControlCalidadDao getControlCalidadDao();
 }

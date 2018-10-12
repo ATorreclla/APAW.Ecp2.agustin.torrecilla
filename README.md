@@ -45,6 +45,17 @@
   - `id`: String
 - 403 BAD_REQUEST
 ---
+### POST /ControlCalidad
+#### Parámetros del cuerpo
+###### issue#2
+- `id`: String (**requerido**)
+- `texto`: String
+- `valoracion`: Boolean
+#### Respuesta
+- 200 OK 
+  - `id`: String
+- 403 BAD_REQUEST
+---
 ### POST /Autobus
 #### Parámetros del cuerpo
 - `id`: String (**requerido**)
@@ -56,16 +67,7 @@
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
-### POST /ControlCalidad
-#### Parámetros del cuerpo
-- `id`: String (**requerido**)
-- `texto`: String
-- `valoracion`: Boolean
-#### Respuesta
-- 200 OK 
-  - `id`: String
-- 403 BAD_REQUEST
----
+
 ### POST /Autobus/{id}/Pasajero
 #### Parámetros del cuerpo
 - `id`: String (**requerido**)

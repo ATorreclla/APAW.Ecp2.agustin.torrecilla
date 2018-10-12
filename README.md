@@ -34,6 +34,17 @@
 * Son las entidades persistentes en la BD
 
 ## API
+### POST /Conductor
+#### Parámetros del cuerpo
+###### issue#1
+- `id`: String (**requerido**)
+- `nombre`: String
+- `telefono`: String
+#### Respuesta
+- 200 OK 
+  - `id`: String
+- 403 BAD_REQUEST
+---
 ### POST /Autobus
 #### Parámetros del cuerpo
 - `id`: String (**requerido**)
@@ -44,16 +55,6 @@
   - `id`: String
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
----
-### POST /Conductor
-#### Parámetros del cuerpo
-- `id`: String (**requerido**)
-- `nombre`: String
-- `telefono`: String
-#### Respuesta
-- 200 OK 
-  - `id`: String
-- 403 BAD_REQUEST
 ---
 ### POST /ControlCalidad
 #### Parámetros del cuerpo

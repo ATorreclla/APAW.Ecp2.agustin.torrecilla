@@ -32,5 +32,4 @@ class HttpRequestTest {
         HttpRequest httpRequest = new HttpRequest("path/3/path", HttpMethod.GET);
         assertFalse(httpRequest.isEqualsPath("path/{id}/path/other"));
     }
-
 }

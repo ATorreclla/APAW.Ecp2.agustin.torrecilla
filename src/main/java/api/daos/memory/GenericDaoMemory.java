@@ -1,19 +1,13 @@
 package api.daos.memory;
 
 import java.util.Map;
-
 import java.util.Optional;
-
 import java.util.List;
-
 import java.util.ArrayList;
-
 import api.daos.GenericDao;
-
 import org.apache.logging.log4j.LogManager;
 
 public abstract class GenericDaoMemory<T> implements GenericDao<T, String> {
-
 
     private Map<String, T> map;
 

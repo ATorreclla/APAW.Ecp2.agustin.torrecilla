@@ -1,9 +1,7 @@
 package api.daos.memory;
 
 import java.util.HashMap;
-
 import api.entities.ControlCalidad;
-
 import api.daos.ControlCalidadDao;
 
 public class ControlCalidadDaoMemory extends GenericDaoMemory<ControlCalidad> implements ControlCalidadDao {

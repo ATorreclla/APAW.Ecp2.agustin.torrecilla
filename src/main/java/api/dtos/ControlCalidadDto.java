@@ -6,13 +6,9 @@ public class ControlCalidadDto {
 
     private Boolean valoracion;
 
-    public ControlCalidadDto(String texto , Boolean valoracion ){
+    public ControlCalidadDto(String texto, Boolean valoracion){
         this.texto  = texto ;
-        this.valoracion  = valoracion ;
-    }
-
-    public ControlCalidadDto(String texto){
-        this(texto,null);
+        this.valoracion = valoracion;
     }
 
     public String getTexto() {

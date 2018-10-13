@@ -28,6 +28,11 @@ public class ControlCalidadIT {
         this.createControlCalidad();
     }
 
+    private String createControlCalidad() {
+        HttpRequest request = HttpRequest.builder(ControlCalidadApiController.CONTROLCALIDADES).body(new ControlCalidadDto("Servicio puntual. Satisfactorio", true)).post();
+        return (String) new Client().submit(request).getBody();
+    }
+
     @Test
     void testConductorInvalidRequest() {
         HttpRequest request = HttpRequest.builder(ControlCalidadApiController.CONTROLCALIDADES + "/invalid").body(null).post();
@@ -44,13 +49,8 @@ public class ControlCalidadIT {
 
     @Test
     void testCreateConductorWithoutConductorDtoName() {
-        HttpRequest request = HttpRequest.builder(ControlCalidadApiController.CONTROLCALIDADES).body(new ControlCalidadDto(null)).post();
+        HttpRequest request = HttpRequest.builder(ControlCalidadApiController.CONTROLCALIDADES).body(new ControlCalidadDto(null, null)).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
-    }
-
-    private String createControlCalidad() {
-        HttpRequest request = HttpRequest.builder(ControlCalidadApiController.CONTROLCALIDADES).body(new ControlCalidadDto("Servicio puntual. Satisfactorio", true)).post();
-        return (String) new Client().submit(request).getBody();
     }
 }

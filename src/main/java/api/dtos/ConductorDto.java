@@ -6,13 +6,8 @@ public class ConductorDto {
 
     private String telefono;
 
-    public ConductorDto(String nombre, String telefono){
-        this.nombre = nombre;
-        this.telefono = telefono;
-    }
-
     public ConductorDto(String nombre){
-        this(nombre,null);
+        this.nombre = nombre;
     }
 
     public String getNombre() {

@@ -15,16 +15,8 @@ public class ControlCalidadDto {
         return texto;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-
     public Boolean getValoracion() {
         return valoracion;
-    }
-
-    public void setValoracion(Boolean valoracion) {
-        this.valoracion = valoracion;
     }
 
     @Override

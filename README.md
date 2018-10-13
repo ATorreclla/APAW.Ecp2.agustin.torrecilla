@@ -57,20 +57,11 @@
 - 403 BAD_REQUEST
 ---
 ### POST /Autobus
+###### issue#3
 #### Parámetros del cuerpo
 - `id`: String (**requerido**)
 - `capacidad`: integer
 - `conductorId`: String (**requerido**)
-#### Respuesta
-- 200 OK 
-  - `id`: String
-- 403 BAD_REQUEST
-- 404 NOT_FOUND
----
-
-### POST /Autobus/{id}/Pasajero
-#### Parámetros del cuerpo
-- `id`: String (**requerido**)
 #### Respuesta
 - 200 OK 
   - `id`: String

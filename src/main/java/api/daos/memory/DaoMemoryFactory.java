@@ -6,11 +6,15 @@ import api.daos.ConductorDao;
 
 import api.daos.ControlCalidadDao;
 
+import api.daos.AutobusDao;
+
 public class DaoMemoryFactory extends DaoFactory {
 
     private ConductorDao conductorDao;
 
     private ControlCalidadDao controlCalidadDao;
+
+    private AutobusDao autobusDao;
 
     @Override
     public ConductorDao getConductorDao() {
@@ -28,4 +32,11 @@ public class DaoMemoryFactory extends DaoFactory {
         return controlCalidadDao;
     }
 
+    @Override
+    public AutobusDao getAutobusDao() {
+        if (autobusDao == null) {
+            autobusDao = new AutobusDaoMemory();
+        }
+        return autobusDao;
+    }
 }

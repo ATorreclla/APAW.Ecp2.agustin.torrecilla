@@ -1,7 +1,6 @@
 package api.entities;
 
 import java.util.Set;
-
 import java.util.HashSet;
 
 public class Autobus {

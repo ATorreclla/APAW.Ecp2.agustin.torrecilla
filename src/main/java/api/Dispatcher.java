@@ -1,14 +1,14 @@
 package api;
 
 import api.apiControllers.ConductorApiController;
-import api.dtos.ConductorDto;
-
 import api.apiControllers.ControlCalidadApiController;
-import api.dtos.ControlCalidadDto;
-
 import api.apiControllers.AutobusApiController;
+import api.daos.DaoFactory;
+import api.daos.memory.DaoMemoryFactory;
+import api.dtos.ConductorDto;
+import api.dtos.ControlCalidadDto;
 import api.dtos.AutobusDto;
-
+import api.exceptions.NotFoundException;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.RequestInvalidException;
 
@@ -16,7 +16,14 @@ import http.HttpRequest;
 import http.HttpResponse;
 import http.HttpStatus;
 
+import org.apache.logging.log4j.LogManager;
+
 public class Dispatcher {
+
+    static{
+        DaoFactory.setFactory(new DaoMemoryFactory());
+        LogManager.getLogger(Dispatcher.class).debug("  create DaoMemoryFactory");
+    }
 
     private ConductorApiController conductorApiController = new ConductorApiController();
 
@@ -34,7 +41,8 @@ public class Dispatcher {
                 case GET:
                     throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
                 case PUT:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doPut(request);
+                    break;
                 case PATCH:
                     throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
                 case DELETE:
@@ -45,6 +53,9 @@ public class Dispatcher {
         } catch (ArgumentNotValidException | RequestInvalidException exception) {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.BAD_REQUEST);
+        } catch (NotFoundException exception) {
+            response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
+            response.setStatus(HttpStatus.NOT_FOUND);
         } catch (Exception exception) {  // Unexpected
             exception.printStackTrace();
             response.setBody(String.format(ERROR_MESSAGE, exception));
@@ -61,6 +72,14 @@ public class Dispatcher {
             response.setBody(this.autobusApiController.create((AutobusDto) request.getBody()));
         } else {
             throw new RequestInvalidException("method error: " + request.getMethod());
+        }
+    }
+
+    private void doPut(HttpRequest request) {
+        if (request.isEqualsPath(ConductorApiController.CONDUCTORES + ConductorApiController.ID_PUT)) {
+            this.conductorApiController.update(request.getPath(1), (ConductorDto) request.getBody());
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
 }

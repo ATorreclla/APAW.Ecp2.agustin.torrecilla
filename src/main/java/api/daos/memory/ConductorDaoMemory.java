@@ -1,14 +1,12 @@
 package api.daos.memory;
 
 import java.util.HashMap;
-
 import api.entities.Conductor;
-
 import api.daos.ConductorDao;
 
 public class ConductorDaoMemory extends GenericDaoMemory<Conductor> implements ConductorDao {
 
-     public ConductorDaoMemory() {
+    public ConductorDaoMemory() {
         super(new HashMap<>());
     }
 

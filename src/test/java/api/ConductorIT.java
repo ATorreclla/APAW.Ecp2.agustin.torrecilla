@@ -2,6 +2,9 @@ package api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import api.exceptions.NotFoundException;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +31,8 @@ public class ConductorIT {
     }
 
     private String createConductor() {
-        HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES).body(new ConductorDto("ManuelRodriguez")).post();
+        HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES)
+                .body(new ConductorDto("Manuel Rodriguez")).post();
         return (String) new Client().submit(request).getBody();
     }
 
@@ -57,7 +61,7 @@ public class ConductorIT {
     void testUpdateConductor() {
         String id = this.createConductor();
         HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES).path(ConductorApiController.ID_ID)
-                .expandPath(id).body(new ConductorDto("dos")).put();
+                .expandPath(id).body(new ConductorDto("Angel")).put();
         new Client().submit(request);
     }
 
@@ -73,8 +77,19 @@ public class ConductorIT {
     @Test
     void testUpdateConductorNotFoundException() {
         HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES).path(ConductorApiController.ID_ID)
-                .expandPath("ERRORINYECTADO").body(new ConductorDto("Andres")).put();
+                .expandPath("ERROR_INYECTADO").body(new ConductorDto("Andres")).put();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
+    void testDeleteConductor() {
+        String id = this.createConductor();
+        DaoFactory.getFactory().getConductorDao().read(id).orElseThrow(
+                () -> new NotFoundException("Delete Conductor "+id));
+        HttpRequest requestDelete = HttpRequest.builder(ConductorApiController.CONDUCTORES).path(ConductorApiController.ID_ID)
+                .expandPath(id).delete();
+        new Client().submit(requestDelete);
+        assertEquals(Optional.empty(), DaoFactory.getFactory().getConductorDao().read(id));
     }
 }

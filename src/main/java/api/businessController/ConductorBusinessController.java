@@ -19,4 +19,8 @@ public class ConductorBusinessController {
         conductor.setTelefono(conductorDto.getTelefono());
         DaoFactory.getFactory().getConductorDao().save(conductor);
     }
+
+    public void delete(String id) {
+        DaoFactory.getFactory().getConductorDao().deleteById(id);
+    }
 }

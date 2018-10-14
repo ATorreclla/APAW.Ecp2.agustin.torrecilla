@@ -1,8 +1,11 @@
 package api.apiControllers;
 
+
+import api.dtos.ControlCalidadIdReadAllDto;
 import api.businessController.ControlCalidadBusinessController;
 import api.dtos.ControlCalidadDto;
 import api.exceptions.ArgumentNotValidException;
+import java.util.List;
 
 public class ControlCalidadApiController {
 
@@ -21,5 +24,9 @@ public class ControlCalidadApiController {
         if (property == null) {
             throw new ArgumentNotValidException(message + " is NULL");
         }
+    }
+
+    public List<ControlCalidadIdReadAllDto> readAll() {
+        return this.controlCalidadBusinessController.readAll();
     }
 }

@@ -69,6 +69,7 @@
 - 404 NOT_FOUND
 ---
 ### PUT /ControlCalidad/{id}
+###### issue#4
 #### Parámetros del cuerpo
 - `id`: String (**requerido**)
 - `texto`: String
@@ -79,6 +80,7 @@
 - 404 NOT_FOUND
 --- 
 ### GET /ControlCalidad
+###### issue#6
 #### Respuesta
 - 200 OK 
   - `[ {id:String,texto:String,valoracion:Boolean} ]`

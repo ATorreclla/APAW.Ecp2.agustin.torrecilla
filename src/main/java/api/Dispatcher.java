@@ -39,7 +39,8 @@ public class Dispatcher {
                     this.doPost(request, response);
                     break;
                 case GET:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doGet(request, response);
+                    break;
                 case PUT:
                     this.doPut(request);
                     break;
@@ -81,6 +82,14 @@ public class Dispatcher {
             this.conductorApiController.update(request.getPath(1), (ConductorDto) request.getBody());
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
+    private void doGet(HttpRequest request, HttpResponse response) {
+        if (request.isEqualsPath(ControlCalidadApiController.CONTROLCALIDADES)) {
+            response.setBody(this.controlCalidadApiController.readAll());
+        } else {
+            throw new RequestInvalidException("method error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
 }

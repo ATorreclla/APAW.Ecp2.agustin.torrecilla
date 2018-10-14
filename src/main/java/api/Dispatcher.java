@@ -1,5 +1,6 @@
 package api;
 
+import api.entities.LineaRegular;
 import api.apiControllers.ConductorApiController;
 import api.apiControllers.ControlCalidadApiController;
 import api.apiControllers.AutobusApiController;
@@ -45,7 +46,8 @@ public class Dispatcher {
                     this.doPut(request);
                     break;
                 case PATCH:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doPatch(request);
+                    break;
                 case DELETE:
                     throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
                 default:
@@ -78,7 +80,7 @@ public class Dispatcher {
     }
 
     private void doPut(HttpRequest request) {
-        if (request.isEqualsPath(ConductorApiController.CONDUCTORES + ConductorApiController.ID_PUT)) {
+        if (request.isEqualsPath(ConductorApiController.CONDUCTORES + ConductorApiController.ID_ID)) {
             this.conductorApiController.update(request.getPath(1), (ConductorDto) request.getBody());
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
@@ -90,6 +92,14 @@ public class Dispatcher {
             response.setBody(this.controlCalidadApiController.readAll());
         } else {
             throw new RequestInvalidException("method error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
+    private void doPatch(HttpRequest request) {
+        if (request.isEqualsPath(AutobusApiController.AUTOBUSES + AutobusApiController.ID_ID + AutobusApiController.LINEAREGULAR)) {
+            this.autobusApiController.updateLineaRegular(request.getPath(1), (LineaRegular) request.getBody());
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
 }

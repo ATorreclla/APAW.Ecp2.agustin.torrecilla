@@ -8,7 +8,7 @@ public class ConductorApiController {
 
     public static final String CONDUCTORES = "/conductores";
 
-    public static final String ID_PUT = "/{id}";
+    public static final String ID_ID = "/{id}";
 
     private ConductorBusinessController conductorBusinessController = new ConductorBusinessController();
 

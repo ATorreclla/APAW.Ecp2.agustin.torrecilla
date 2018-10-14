@@ -56,7 +56,7 @@ public class ConductorIT {
     @Test
     void testUpdateConductor() {
         String id = this.createConductor();
-        HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES).path(ConductorApiController.ID_PUT)
+        HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES).path(ConductorApiController.ID_ID)
                 .expandPath(id).body(new ConductorDto("dos")).put();
         new Client().submit(request);
     }
@@ -64,7 +64,7 @@ public class ConductorIT {
     @Test
     void testUpdateConductorWithoutUserDto() {
         String id = this.createConductor();
-        HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES).path(ConductorApiController.ID_PUT)
+        HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES).path(ConductorApiController.ID_ID)
                 .expandPath(id).body(null).put();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
@@ -72,8 +72,8 @@ public class ConductorIT {
 
     @Test
     void testUpdateConductorNotFoundException() {
-        HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES).path(ConductorApiController.ID_PUT)
-                .expandPath("FAILURE").body(new ConductorDto("dos")).put();
+        HttpRequest request = HttpRequest.builder(ConductorApiController.CONDUCTORES).path(ConductorApiController.ID_ID)
+                .expandPath("ERRORINYECTADO").body(new ConductorDto("Andres")).put();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
     }

@@ -95,6 +95,7 @@
 - 404 NOT_FOUND
 ---
 ### DELETE /Conductor/{id}
+###### issue#8
 #### Respuesta
 - 200 OK 
 ---

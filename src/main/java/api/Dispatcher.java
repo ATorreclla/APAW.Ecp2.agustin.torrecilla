@@ -49,7 +49,8 @@ public class Dispatcher {
                     this.doPatch(request);
                     break;
                 case DELETE:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doDelete(request);
+                    break;
                 default:
                     throw new RequestInvalidException("method error: " + request.getMethod());
             }
@@ -98,6 +99,14 @@ public class Dispatcher {
     private void doPatch(HttpRequest request) {
         if (request.isEqualsPath(AutobusApiController.AUTOBUSES + AutobusApiController.ID_ID + AutobusApiController.LINEAREGULAR)) {
             this.autobusApiController.updateLineaRegular(request.getPath(1), (LineaRegular) request.getBody());
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
+    private void doDelete(HttpRequest request) {
+        if (request.isEqualsPath(ConductorApiController.CONDUCTORES + ConductorApiController.ID_ID)) {
+            this.conductorApiController.delete(request.getPath(1));
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }

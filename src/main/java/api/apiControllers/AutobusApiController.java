@@ -30,6 +30,5 @@ public class AutobusApiController {
     public void updateLineaRegular(String autobusId, LineaRegular lineaRegular){
         this.validate(lineaRegular, "lineaRegular");
         this.autobusBusinessController.updateLineaRegular(lineaRegular, autobusId);
-
     }
 }

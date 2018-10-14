@@ -29,4 +29,8 @@ public class ConductorApiController {
             throw new ArgumentNotValidException(message + " is NULL");
         }
     }
+
+    public void delete(String id) {
+        this.conductorBusinessController.delete(id);
+    }
 }

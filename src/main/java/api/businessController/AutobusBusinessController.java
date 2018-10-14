@@ -20,5 +20,4 @@ public class AutobusBusinessController {
         autobus.setLineaRegular(lineaRegular);
         DaoFactory.getFactory().getAutobusDao().save(autobus);
     }
-
 }

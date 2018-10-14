@@ -6,6 +6,7 @@ import api.daos.memory.DaoMemoryFactory;
 import api.dtos.AutobusDto;
 import api.entities.Conductor;
 
+import api.entities.LineaRegular;
 import http.Client;
 import http.HttpException;
 import http.HttpRequest;
@@ -43,8 +44,39 @@ public class AutobusIT {
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
 
+    @Test
+    void testUpdateAutobusNotFoundException() {
+        LineaRegular lineaRegular = LineaRegular.NACIONAL;
+        String id = this.createAutobus(lineaRegular);
+        HttpRequest request = HttpRequest.builder(AutobusApiController.AUTOBUSES).path(AutobusApiController.ID_ID)
+                .expandPath(id + "ERRORINYECTADO").path(AutobusApiController.LINEAREGULAR).body(LineaRegular.NACIONAL).patch();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
+    void testUpdateLineaRegular(){
+        LineaRegular lineaRegular = LineaRegular.INTERURBANA;
+        String id = this.createAutobus(lineaRegular);
+        HttpRequest request = HttpRequest.builder(AutobusApiController.AUTOBUSES).path(AutobusApiController.ID_ID)
+                .expandPath(id).path(AutobusApiController.LINEAREGULAR).body(lineaRegular).patch();
+        new Client().submit(request);
+        lineaRegular = LineaRegular.PROVINCIAL;
+        id = this.createAutobus(lineaRegular);
+        request = HttpRequest.builder(AutobusApiController.AUTOBUSES).path(AutobusApiController.ID_ID)
+                .expandPath(id).path(AutobusApiController.LINEAREGULAR).body(lineaRegular).patch();
+        new Client().submit(request);
+    }
+
     private String createAutobus() {
-        HttpRequest request = HttpRequest.builder(AutobusApiController.AUTOBUSES).body(new AutobusDto(45, new Conductor("Isabel Garcia", "656534365"))).post();
+        Conductor conductor = new Conductor("Isabel Garcia", "656534365");
+        HttpRequest request = HttpRequest.builder(AutobusApiController.AUTOBUSES).body(new AutobusDto(45, conductor)).post();
+        return (String) new Client().submit(request).getBody();
+    }
+
+    private String createAutobus(LineaRegular lineaRegular) {
+        Conductor conductor = new Conductor("Alberto Perez Sanz", "693733845");
+        HttpRequest request = HttpRequest.builder(AutobusApiController.AUTOBUSES).body(new AutobusDto(45, conductor, lineaRegular)).post();
         return (String) new Client().submit(request).getBody();
     }
 }

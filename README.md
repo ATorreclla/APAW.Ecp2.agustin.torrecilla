@@ -85,9 +85,10 @@
 - 200 OK 
   - `[ {id:String,texto:String,valoracion:Boolean} ]`
 ---
-### PATH /Conductor/{id}/telefono
+### PATH /Autobus/{id}/LineaRegular
+###### issue#7
 #### Parámetros del cuerpo
-- `telefono`: String (**requerido**)
+- `lineaRegular`: String (**requerido**)
 #### Respuesta
 - 200 OK 
 - 403 BAD_REQUEST

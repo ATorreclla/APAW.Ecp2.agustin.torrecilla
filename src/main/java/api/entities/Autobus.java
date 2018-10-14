@@ -29,52 +29,8 @@ public class Autobus {
         this.id = id;
     }
 
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
-    }
-
-    public Conductor getConductor() {
-        return conductor;
-    }
-
-    public void setConductor(Conductor conductor) {
-        this.conductor = conductor;
-    }
-
-    public LineaRegular getLineaRegular() {
-        return lineaRegular;
-    }
-
     public void setLineaRegular(LineaRegular lineaRegular) {
         this.lineaRegular = lineaRegular;
-    }
-
-    public Set<Pasajero> getPasajeros(){
-        return pasajeros;
-    }
-
-    private boolean viaja(Pasajero pasajero){
-        return this.pasajeros.contains(pasajero);
-    }
-
-    private boolean sube(Pasajero pasajero){
-        return this.pasajeros.add(pasajero);
-    }
-
-    private boolean baja(Pasajero pasajero){
-        return this.pasajeros.remove(pasajero);
-    }
-
-    private boolean subenTodos(Set<Pasajero> pasajeros){
-        return this.pasajeros.addAll(pasajeros);
-    }
-
-    private boolean bajanTodos(Set<Pasajero> pasajeros){
-        return this.pasajeros.removeAll(pasajeros);
     }
 
     @Override

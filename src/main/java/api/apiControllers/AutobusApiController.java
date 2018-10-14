@@ -1,5 +1,6 @@
 package api.apiControllers;
 
+import api.entities.LineaRegular;
 import api.businessController.AutobusBusinessController;
 import api.dtos.AutobusDto;
 import api.exceptions.ArgumentNotValidException;
@@ -7,6 +8,10 @@ import api.exceptions.ArgumentNotValidException;
 public class AutobusApiController {
 
     public static final String AUTOBUSES = "/autobuses";
+
+    public static final String ID_ID = "/{id}";
+
+    public static final String LINEAREGULAR = "/lineaRegular";
 
     private AutobusBusinessController autobusBusinessController = new AutobusBusinessController();
 
@@ -20,5 +25,11 @@ public class AutobusApiController {
         if (property == null) {
             throw new ArgumentNotValidException(message + " is NULL");
         }
+    }
+
+    public void updateLineaRegular(String autobusId, LineaRegular lineaRegular){
+        this.validate(lineaRegular, "lineaRegular");
+        this.autobusBusinessController.updateLineaRegular(lineaRegular, autobusId);
+
     }
 }

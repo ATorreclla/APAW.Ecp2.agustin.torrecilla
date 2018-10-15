@@ -101,6 +101,7 @@
 ---
 ### GET /Autobus/search?q=average:>=10
 #### Respuesta
+#### no entregada. Tiene errores.
 - 200 OK
   - `[ {id:String,reference:String} ]`
 - 403 BAD_REQUEST

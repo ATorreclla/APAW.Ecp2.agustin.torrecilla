@@ -34,19 +34,9 @@
 * Son las entidades persistentes en la BD
 
 ## API
-### POST /Autobus
-#### Parámetros del cuerpo
-- `id`: String (**requerido**)
-- `capacidad`: integer
-- `conductorId`: String (**requerido**)
-#### Respuesta
-- 200 OK 
-  - `id`: String
-- 403 BAD_REQUEST
-- 404 NOT_FOUND
----
 ### POST /Conductor
 #### Parámetros del cuerpo
+###### issue#1
 - `id`: String (**requerido**)
 - `nombre`: String
 - `telefono`: String
@@ -57,6 +47,7 @@
 ---
 ### POST /ControlCalidad
 #### Parámetros del cuerpo
+###### issue#2
 - `id`: String (**requerido**)
 - `texto`: String
 - `valoracion`: Boolean
@@ -65,9 +56,12 @@
   - `id`: String
 - 403 BAD_REQUEST
 ---
-### POST /Autobus/{id}/Pasajero
+### POST /Autobus
+###### issue#3
 #### Parámetros del cuerpo
 - `id`: String (**requerido**)
+- `capacidad`: integer
+- `conductorId`: String (**requerido**)
 #### Respuesta
 - 200 OK 
   - `id`: String
@@ -75,6 +69,7 @@
 - 404 NOT_FOUND
 ---
 ### PUT /ControlCalidad/{id}
+###### issue#4
 #### Parámetros del cuerpo
 - `id`: String (**requerido**)
 - `texto`: String
@@ -85,19 +80,22 @@
 - 404 NOT_FOUND
 --- 
 ### GET /ControlCalidad
+###### issue#6
 #### Respuesta
 - 200 OK 
   - `[ {id:String,texto:String,valoracion:Boolean} ]`
 ---
-### PATH /Conductor/{id}/telefono
+### PATH /Autobus/{id}/LineaRegular
+###### issue#7
 #### Parámetros del cuerpo
-- `telefono`: String (**requerido**)
+- `lineaRegular`: String (**requerido**)
 #### Respuesta
 - 200 OK 
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
 ### DELETE /Conductor/{id}
+###### issue#8
 #### Respuesta
 - 200 OK 
 ---

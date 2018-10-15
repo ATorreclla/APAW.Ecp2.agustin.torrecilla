@@ -20,5 +20,4 @@ public class HttpResponse extends HttpBase {
     public String toString() {
         return status.toString() + super.toString();
     }
-
 }

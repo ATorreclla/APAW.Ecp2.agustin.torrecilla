@@ -1,10 +1,10 @@
 package api.businessController;
 
+import api.entities.Autobus;
 import api.exceptions.NotFoundException;
 import api.entities.LineaRegular;
 import api.daos.DaoFactory;
 import api.dtos.AutobusDto;
-import api.entities.Autobus;
 
 public class AutobusBusinessController {
 

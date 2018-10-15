@@ -91,7 +91,7 @@ public class Dispatcher {
     private void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(ControlCalidadApiController.CONTROLCALIDADES)) {
             response.setBody(this.controlCalidadApiController.readAll());
-        } else {
+        } else{
             throw new RequestInvalidException("method error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
